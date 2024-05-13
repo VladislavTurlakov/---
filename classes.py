@@ -211,9 +211,9 @@ class PowerSupply(Component):
 
 class Admin:
     """Класс Admin"""
-
+    
     def addComponent(self, component: Component) -> bool:
-        print("""Что хотим добавить в базу данных?
+        choice = int(input("""Что хотим добавить в базу данных?
               1 - ОС
               2 - SSD
               3 - Охлаждение
@@ -223,10 +223,22 @@ class Admin:
               7 - Материнская плата
               8 - Оперативная память
               9 - Блок питания
-              """)
+              """))
+        match choice:
+            case 1:  addOS()  # ОС
+            case 2:  addSSD()  # SSD
+            case 3:  addCPUCooler()  # Охлаждение
+            case 4:  addCase()  # Системный блок
+            case 5:  addCPU()  # Центральный процессор
+            case 6:  addGPU()  # Графический процессор
+            case 7:  addMotherBoard()  # Материнская плата
+            case 8:  addListRAM()  # Оперативная память
+            case 9:  addPowerSupply()  # Блок питания
+            case _:  print("Некорректная цифра")  # Некорректная цифра
+
         
     def removeComponent(self, component: Component) -> bool:
-        print("""Что хотим удалить из базы данных?
+        choice = int(input("""Что хотим удалить из базы данных?
               1 - ОС
               2 - SSD
               3 - Охлаждение
@@ -236,10 +248,21 @@ class Admin:
               7 - Материнская плата
               8 - Оперативная память
               9 - Блок питания
-              """)
+              """))
+        match choice:
+            case 1:  removeOS()  # ОС
+            case 2:  removeSSD()  # SSD
+            case 3:  removeCPUCooler()  # Охлаждение
+            case 4:  removeCase()  # Системный блок
+            case 5:  removeCPU()  # Центральный процессор
+            case 6:  removeGPU()  # Графический процессор
+            case 7:  removeMotherBoard()  # Материнская плата
+            case 8:  removeRAM()  # Оперативная память
+            case 9:  removePowerSupply()  # Блок питания
+            case _:  print("Некорректная цифра")  # Некорректная цифра
 
     def showComponents(self) -> list:
-        print("""Список каких компонентов показать?
+        choice = int(input("""Список каких компонентов показать?
               1 - ОС
               2 - SSD
               3 - Охлаждение
@@ -249,7 +272,18 @@ class Admin:
               7 - Материнская плата
               8 - Оперативная память
               9 - Блок питания
-              """)
+              """))
+        match choice:
+            case 1:  showListOS()  # ОС
+            case 2:  showListSSD()  # SSD
+            case 3:  showListCPUCooler()  # Охлаждение
+            case 4:  showListCase()  # Системный блок
+            case 5:  showListCPU()  # Центральный процессор
+            case 6:  showListGPU()  # Графический процессор
+            case 7:  showListMotherBoard()  # Материнская плата
+            case 8:  showListRAM()  # Оперативная память
+            case 9:  showListPowerSupply()  # Блок питания
+            case _:  print("Некорректная цифра")  # Некорректная цифра
 
 class ComponentStorage:
     def __init__(self, listOS: list, listSSD: list, listCPUCooler: list, listCase: list, listCPU: list, listGPU: list, 
@@ -344,3 +378,5 @@ class ComponentStorage:
 
     def showListPowerSupply(self) -> list:
         pass
+     
+

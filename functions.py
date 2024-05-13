@@ -58,6 +58,7 @@ def adminActing():
                     print("Не удалось удалить компоненту из базы данных")
                 break
             case 3:  # получение списка
-                admin.showComponents
+                result = admin.showComponents()
+                print(result)
                 break
     
