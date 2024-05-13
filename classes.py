@@ -225,15 +225,15 @@ class Admin:
               9 - Блок питания
               """))
         match choice:
-            case 1:  addOS()  # ОС
-            case 2:  addSSD()  # SSD
-            case 3:  addCPUCooler()  # Охлаждение
-            case 4:  addCase()  # Системный блок
-            case 5:  addCPU()  # Центральный процессор
-            case 6:  addGPU()  # Графический процессор
-            case 7:  addMotherBoard()  # Материнская плата
-            case 8:  addListRAM()  # Оперативная память
-            case 9:  addPowerSupply()  # Блок питания
+            case 1:  pass #addOS()  # ОС
+            case 2:  pass #addSSD()  # SSD
+            case 3:  pass #addCPUCooler()  # Охлаждение
+            case 4:  pass #addCase()  # Системный блок
+            case 5:  pass #addCPU()  # Центральный процессор
+            case 6:  pass #addGPU()  # Графический процессор
+            case 7:  pass #addMotherBoard()  # Материнская плата
+            case 8:  pass #addListRAM()  # Оперативная память
+            case 9:  pass #addPowerSupply()  # Блок питания
             case _:  print("Некорректная цифра")  # Некорректная цифра
 
         
@@ -250,15 +250,15 @@ class Admin:
               9 - Блок питания
               """))
         match choice:
-            case 1:  removeOS()  # ОС
-            case 2:  removeSSD()  # SSD
-            case 3:  removeCPUCooler()  # Охлаждение
-            case 4:  removeCase()  # Системный блок
-            case 5:  removeCPU()  # Центральный процессор
-            case 6:  removeGPU()  # Графический процессор
-            case 7:  removeMotherBoard()  # Материнская плата
-            case 8:  removeRAM()  # Оперативная память
-            case 9:  removePowerSupply()  # Блок питания
+            case 1:  pass #removeOS()  # ОС
+            case 2:  pass #removeSSD()  # SSD
+            case 3:  pass #removeCPUCooler()  # Охлаждение
+            case 4:  pass #removeCase()  # Системный блок
+            case 5:  pass #removeCPU()  # Центральный процессор
+            case 6:  pass #removeGPU()  # Графический процессор
+            case 7:  pass #removeMotherBoard()  # Материнская плата
+            case 8:  pass #removeRAM()  # Оперативная память
+            case 9:  pass#removePowerSupply()  # Блок питания
             case _:  print("Некорректная цифра")  # Некорректная цифра
 
     def showComponents(self) -> list:
@@ -274,15 +274,15 @@ class Admin:
               9 - Блок питания
               """))
         match choice:
-            case 1:  showListOS()  # ОС
-            case 2:  showListSSD()  # SSD
-            case 3:  showListCPUCooler()  # Охлаждение
-            case 4:  showListCase()  # Системный блок
-            case 5:  showListCPU()  # Центральный процессор
-            case 6:  showListGPU()  # Графический процессор
-            case 7:  showListMotherBoard()  # Материнская плата
-            case 8:  showListRAM()  # Оперативная память
-            case 9:  showListPowerSupply()  # Блок питания
+            case 1:  pass #showListOS()  # ОС
+            case 2:  pass #showListSSD()  # SSD
+            case 3:  pass #showListCPUCooler()  # Охлаждение
+            case 4:  pass #showListCase()  # Системный блок
+            case 5:  pass #showListCPU()  # Центральный процессор
+            case 6:  pass #showListGPU()  # Графический процессор
+            case 7:  pass #showListMotherBoard()  # Материнская плата
+            case 8:  pass #showListRAM()  # Оперативная память
+            case 9:  pass #showListPowerSupply()  # Блок питания
             case _:  print("Некорректная цифра")  # Некорректная цифра
 
 class ComponentStorage:
