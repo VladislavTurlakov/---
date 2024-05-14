@@ -139,7 +139,7 @@ class OS(Component):
 class SSD(Component):
     """Класс SSD"""
     def __init__(self, cost, name, uuid, capacity, formFactor, cache):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__capacity = capacity
         self.__formFactor = formFactor
         self.__cache = cache
@@ -147,7 +147,7 @@ class SSD(Component):
 class CPUCooler(Component):
     """Класс охлаждения процессора"""
     def __init__(self, cost, name, uuid, fanRPM, color, noiseLevel):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__fanRPM = fanRPM
         self.__color = color
         self.__noiseLevel = noiseLevel
@@ -155,7 +155,7 @@ class CPUCooler(Component):
 class Case(Component):
     """Класс системного блока"""
     def __init__(self, cost, name, uuid, type, color, sidePanel, external525):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__type = type
         self.__color = color
         self.__sidePanel = sidePanel
@@ -164,7 +164,7 @@ class Case(Component):
 class CPU(Component):
     """Класс центрального процесса"""
     def __init__(self, cost, name, uuid, coreCount, boostClock, integratedGraphics, coreClock, TDP):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__coreCount = coreCount
         self.__boostClock = boostClock
         self.__integratedGraphics = integratedGraphics
@@ -174,7 +174,7 @@ class CPU(Component):
 class GPU(Component):
     """Класс графического процессора"""
     def __init__(self, cost, name, uuid, chipSet, coreClock, color, memory, boostClock, length):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__chipSet = chipSet
         self.__coreClock = coreClock
         self.__color = color
@@ -185,7 +185,7 @@ class GPU(Component):
 class MotherBoard(Component):
     """Класс материнской платы"""
     def __init__(self, cost, name, uuid, socket, memoryMax, formFactor, memorySlots):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__socket = socket
         self.__memoryMax = memoryMax
         self.__formFactor = formFactor
@@ -194,14 +194,14 @@ class MotherBoard(Component):
 class RAM(Component):
     """Класс оперативной памяти ПК"""
     def __init__(self, cost, name, uuid, modules, CASLatency):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__modules = modules
         self.__CASLatency = CASLatency
 
 class PowerSupply(Component):
     """Класс блока питания"""
     def __init__(self, cost, name, uuid, type, wattage, efficiencyRating, Modular):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__type = type
         self.__wattage = wattage
         self.__efficiencyRating = efficiencyRating
@@ -319,32 +319,103 @@ class Admin:
         
         component._cost = int(input("Введите стоимость: "))
         component._name = str(input("Введите назваание: "))
-        component._uuid = int(input("Введите id: "))
+
+        while True:
+            component._uuid = int(input("Введите id: "))
+            """if component._uuid in database: # если этот id есть в бд
+                   continue
+               else:  # этого id нет в бд
+                   break"""
+            break
 
         match choice:
             case 1:   # ОС
-                mode = str(input("Введите mode: "))
+                mode = int(input("Введите mode: "))
                 sMemory = int(input("Введите maxSupportedMemory: "))
-                objectOS = OS(component._cost,component._name,component._uuid, mode=mode, maxSupportedMemory=sMemory)  
+                objectOS = OS(component._cost,component._name,component._uuid,mode=mode,maxSupportedMemory=sMemory)  
                 if ComponentStorage.addOS(objectOS) == True:
                     print(f"ОС {objectOS} добавлена")
                     return True
+                
             case 2:  # SSD
-                ComponentStorage.addSSD()  
+                capacity = str(input("Введите capacity: "))
+                formFactor = str(input("Введите formFactor: "))
+                cache = str(input("Введите cache: "))
+                objectSSD = SSD(component._cost,component._name,component._uuid,capacity=capacity, formFactor=formFactor,cache=cache)
+                if ComponentStorage.addSSD(objectSSD) == True:
+                    print(f"SSD {objectSSD} добавлен")
+                    return True
+                
             case 3:  # Охлаждение
-                ComponentStorage.addCPUCooler()  
+                fanRPM = str(input("Введите fanRPM: "))
+                color = str(input("Введите color: "))
+                noiseLevel = float(input("Введите noiseLevel: "))
+                objectCPUCooler = CPUCooler(component._cost,component._name,component._uuid,fanRPM=fanRPM,color=color,noiseLevel=noiseLevel)
+                if ComponentStorage.addCPUCooler(objectCPUCooler) == True:
+                    print(f"CPUCooler {objectCPUCooler} добавлен")
+                    return True
+                
             case 4:  # Системный блок
-                ComponentStorage.addCase()  
+                type = str(input("Введите type: "))
+                color = str(input("Введите color: "))
+                sidePanel = str(input("Введите sidePanel: "))
+                external525 = int(input("Введите external525: "))
+                objectCase = Case(component._cost,component._name,component._uuid,type=type,color=color,sidePanel=sidePanel,external525=external525)
+                if ComponentStorage.addCase(objectCase) == True:
+                    print(f"Case {objectCase} добавлен")
+                    return True
+                
             case 5:  # Центральный процессор
-                ComponentStorage.addCPU()  
+                coreCount = int(input("Введите coreCount: "))
+                boostClock = float(input("Введите boostClock: "))
+                integratedGraphics = str(input("Введите integratedGraphics: "))
+                coreClock = float(input("Введите coreClock: "))
+                TDP = int(input("Введите TDP: "))
+                objectCPU = CPU(component._cost,component._name,component._uuid,coreCount=coreCount,boostClock=boostClock,integratedGraphics=integratedGraphics,coreClock=coreClock,TDP=TDP)
+                if ComponentStorage.addCPU(objectCPU) == True:
+                    print(f"CPU {objectCPU} добавлен")
+                    return True
+                
             case 6:  # Графический процессор
-                ComponentStorage.addGPU()  
+                chipSet = str(input("Введите chipSet: "))
+                boostClock = float(input("Введите boostClock: "))
+                color = str(input("Введите color: "))
+                coreClock = float(input("Введите coreClock: "))
+                memory = str(input("Введите memory: "))
+                length = int(input("Введите length: "))
+                objectGPU = GPU(component._cost,component._name,component._uuid,chipSet=chipSet,coreClock=coreClock,color=color,memory=memory,boostClock=boostClock,length=length)
+                if ComponentStorage.addGPU(objectGPU) == True:
+                    print(f"GPU {objectGPU} добавлен")
+                    return True
+                
             case 7:  # Материнская плата
-                ComponentStorage.addMotherBoard()  
+                socket = str(input("Введите socket: "))
+                memoryMax = int(input("Введите memoryMax: "))
+                formFactor = str(input("Введите formFactor: "))
+                memorySlots = int(input("Введите memorySlots: "))
+                objectMotherBoard = MotherBoard(component._cost,component._name,component._uuid,socket=socket,memoryMax=memoryMax,formFactor=formFactor,memorySlots=memorySlots)
+                if ComponentStorage.addMotherBoard(objectMotherBoard) == True:
+                    print(f"MotherBoard {objectMotherBoard} добавлен")
+                    return True
+                
             case 8:  # Оперативная память
-                ComponentStorage.addListRAM()  
+                modules = str(input("Введите modules: "))
+                CASLatency = int(input("Введите CASLatency: "))
+                objectRAM = RAM(component._cost,component._name,component._uuid,modules=modules,CASLatency=CASLatency)  
+                if ComponentStorage.addRAM(objectRAM) == True:
+                    print(f"RAM {objectRAM} добавлена")
+                    return True
+             
             case 9:  # Блок питания
-                ComponentStorage.addPowerSupply()  
+                type = str(input("Введите type: "))
+                wattage = int(input("Введите wattage: "))
+                efficiencyRating = str(input("Введите efficiencyRating: "))
+                Modular = str(input("Введите Modular: "))
+                objectPowerSupply = PowerSupply(component._cost,component._name,component._uuid,type=type,wattage=wattage,efficiencyRating=efficiencyRating,Modular=Modular)
+                if ComponentStorage.addPowerSupply(objectPowerSupply) == True:
+                    print(f"PowerSupply {objectPowerSupply} добавлен")
+                    return True
+                
             case _:  # Некорректная цифра
                 print("Некорректная цифра")  
 
