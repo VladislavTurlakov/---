@@ -43,14 +43,16 @@ def adminActing():
             case 0:  # выход из программы
                 break
             case 1:  # добавление компоненты
-                result = admin.addComponent()
+                com = c.Component(0,0,0)  # начальная инициализация объекта 
+                result = admin.addComponent(com)
                 if result == True:  # добавление компоненты в базу данных прошло успешно
                     print("Добавление компоненты в базу данных прошло успешно")
                 else:  # не удалось добавить компоненту в базу данных
                     print("Не удалось добавить компоненту в базу данных")
                 break
             case 2:  # удаление компоненты
-                result = admin.removeComponent()
+                com = c.Component(0,0,0)  # начальная инициализация объекта
+                result = admin.removeComponent(com)
                 if result == True:  # удаление из базы данных прошло успешно
                     print("Удаление компоненты из базы данных прошло успешно")
                 else:  # не удалось удалить компоненту из базы данных

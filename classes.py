@@ -121,8 +121,7 @@ class ConcreteComputerBuilder2(ComputerBuilder):
 
 class Component:
     """Класс компоненты компьютера"""
-    def __init__(self, cost, name, uuid, computer: Computer):
-        self._computer = computer
+    def __init__(self, cost, name, uuid):
         self._cost = cost
         self._name = name
         self._uuid = uuid
@@ -133,7 +132,7 @@ class Component:
 class OS(Component):
     """Класс операционной системы"""
     def __init__(self, cost, name, uuid, mode, maxSupportedMemory):
-        super().init(cost, name, uuid)
+        super().__init__(cost, name, uuid)
         self.__mode = mode
         self.__maxSupportedMemory = maxSupportedMemory
 
@@ -221,164 +220,203 @@ class ComponentStorage:
         self.__listRAM = listRAM
         self.__listPowerSupply = listPowerSupply
     
-    def addOS(self, os: OS) -> bool:
+    def addOS(os: OS) -> bool:
+        return True
+
+    def addSSD(ssd: SSD) -> bool:
         pass
 
-    def addSSD(self, ssd: SSD) -> bool:
+    def addCPUCooler(cpucooler: CPUCooler) -> bool:
         pass
 
-    def addCPUCooler(self, cpucooler: CPUCooler) -> bool:
+    def addCase(case: Case) -> bool:
         pass
 
-    def addCase(self, case: Case) -> bool:
+    def addCPU(cpu: CPU) -> bool:
         pass
 
-    def addCPU(self, cpu: CPU) -> bool:
+    def addGPU(gpu: GPU) -> bool:
         pass
 
-    def addGPU(self, gpu: GPU) -> bool:
+    def addMotherBoard(motherboard: MotherBoard) -> bool:
         pass
 
-    def addMotherBoard(self, motherboard: MotherBoard) -> bool:
+    def addRAM(ram: RAM) -> bool:
         pass
 
-    def addRAM(self, ram: RAM) -> bool:
+    def addPowerSupply(powersupply: PowerSupply) -> bool:
         pass
 
-    def addPowerSupply(self, powersupply: PowerSupply) -> bool:
+    def removeOS(os: OS) -> bool:
         pass
 
-    def removeOS(self, os: OS) -> bool:
+    def removeSSD(ssd: SSD) -> bool:
         pass
 
-    def removeSSD(self, ssd: SSD) -> bool:
+    def removeCPUCooler(cpucooler: CPUCooler) -> bool:
         pass
 
-    def removeCPUCooler(self, cpucooler: CPUCooler) -> bool:
+    def removeCase(case: Case) -> bool:
         pass
 
-    def removeCase(self, case: Case) -> bool:
+    def removeCPU(cpu: CPU) -> bool:
         pass
 
-    def removeCPU(self, cpu: CPU) -> bool:
+    def removeGPU(gpu: GPU) -> bool:
         pass
 
-    def removeGPU(self, gpu: GPU) -> bool:
+    def removeMotherBoard(motherboard: MotherBoard) -> bool:
         pass
 
-    def removeMotherBoard(self, motherboard: MotherBoard) -> bool:
+    def removeRAM(ram: RAM) -> bool:
         pass
 
-    def removeRAM(self, ram: RAM) -> bool:
+    def removePowerSupply(powersupply: PowerSupply) -> bool:
         pass
 
-    def removePowerSupply(self, powersupply: PowerSupply) -> bool:
-        pass
-
-    def showListOS(self) -> list:
+    def showListOS() -> list:
         query = """"""
 
-    def showListSSD(self) -> list:
+    def showListSSD() -> list:
         query = """"""
 
-    def showListCPUCooler(self) -> list:
+    def showListCPUCooler() -> list:
         query = """"""
 
-    def showListCase(self) -> list:
+    def showListCase() -> list:
         query = """"""
 
-    def showListCPU(self) -> list:
+    def showListCPU() -> list:
         query = """"""
 
-    def showListGPU(self) -> list:
+    def showListGPU() -> list:
         query = """"""
 
-    def showListMotherBoard(self) -> list:
+    def showListMotherBoard() -> list:
         query = """"""
 
-    def showListRAM(self) -> list:
+    def showListRAM() -> list:
         query = """"""
 
-    def showListPowerSupply(self) -> list:
-        query = """"""
+    def showListPowerSupply() -> list:
+        query = """"""     
 
 class Admin:
     """Класс Admin"""
 
     def addComponent(self, component: Component) -> bool:
         choice = int(input("""Что хотим добавить в базу данных?
-              1 - ОС
-              2 - SSD
-              3 - Охлаждение
-              4 - Системный блок
-              5 - Центральный процессор
-              6 - Графический процессор
-              7 - Материнская плата
-              8 - Оперативная память
-              9 - Блок питания
-              """))
+        1 - ОС
+        2 - SSD
+        3 - Охлаждение
+        4 - Системный блок
+        5 - Центральный процессор
+        6 - Графический процессор
+        7 - Материнская плата
+        8 - Оперативная память
+        9 - Блок питания
+        """))
         
+        component._cost = int(input("Введите стоимость: "))
+        component._name = str(input("Введите назваание: "))
+        component._uuid = int(input("Введите id: "))
+
         match choice:
-            case 1:  ComponentStorage.addOS() # ОС
-            case 2:  ComponentStorage.addSSD()  # SSD
-            case 3:  ComponentStorage.addCPUCooler()  # Охлаждение
-            case 4:  ComponentStorage.addCase()  # Системный блок
-            case 5:  ComponentStorage.addCPU()  # Центральный процессор
-            case 6:  ComponentStorage.addGPU()  # Графический процессор
-            case 7:  ComponentStorage.addMotherBoard()  # Материнская плата
-            case 8:  ComponentStorage.addListRAM()  # Оперативная память
-            case 9:  ComponentStorage.addPowerSupply()  # Блок питания
-            case _:  print("Некорректная цифра")  # Некорректная цифра
+            case 1:   # ОС
+                mode = str(input("Введите mode: "))
+                sMemory = int(input("Введите maxSupportedMemory: "))
+                objectOS = OS(component._cost,component._name,component._uuid, mode=mode, maxSupportedMemory=sMemory)  
+                if ComponentStorage.addOS(objectOS) == True:
+                    print(f"ОС {objectOS} добавлена")
+                    return True
+            case 2:  # SSD
+                ComponentStorage.addSSD()  
+            case 3:  # Охлаждение
+                ComponentStorage.addCPUCooler()  
+            case 4:  # Системный блок
+                ComponentStorage.addCase()  
+            case 5:  # Центральный процессор
+                ComponentStorage.addCPU()  
+            case 6:  # Графический процессор
+                ComponentStorage.addGPU()  
+            case 7:  # Материнская плата
+                ComponentStorage.addMotherBoard()  
+            case 8:  # Оперативная память
+                ComponentStorage.addListRAM()  
+            case 9:  # Блок питания
+                ComponentStorage.addPowerSupply()  
+            case _:  # Некорректная цифра
+                print("Некорректная цифра")  
 
     def removeComponent(self, component: Component) -> bool:
         choice = int(input("""Что хотим удалить из базы данных?
-              1 - ОС
-              2 - SSD
-              3 - Охлаждение
-              4 - Системный блок
-              5 - Центральный процессор
-              6 - Графический процессор
-              7 - Материнская плата
-              8 - Оперативная память
-              9 - Блок питания
-              """))
+        1 - ОС
+        2 - SSD
+        3 - Охлаждение
+        4 - Системный блок
+        5 - Центральный процессор
+        6 - Графический процессор
+        7 - Материнская плата
+        8 - Оперативная память
+        9 - Блок питания
+        """))
         
         match choice:
-            case 1:  ComponentStorage.removeOS()  # ОС
-            case 2:  ComponentStorage.removeSSD()  # SSD
-            case 3:  ComponentStorage.removeCPUCooler()  # Охлаждение
-            case 4:  ComponentStorage.removeCase()  # Системный блок
-            case 5:  ComponentStorage.removeCPU()  # Центральный процессор
-            case 6:  ComponentStorage.removeGPU()  # Графический процессор
-            case 7:  ComponentStorage.removeMotherBoard()  # Материнская плата
-            case 8:  ComponentStorage.removeRAM()  # Оперативная память
-            case 9:  ComponentStorage.removePowerSupply()  # Блок питания
-            case _:  print("Некорректная цифра")  # Некорректная цифра
+            case 1:  # ОС
+                ComponentStorage.removeOS()  
+            case 2:  # SSD
+                ComponentStorage.removeSSD()  
+            case 3:  # Охлаждение
+                ComponentStorage.removeCPUCooler()  
+            case 4:  # Системный блок
+                ComponentStorage.removeCase()  
+            case 5:  # Центральный процессор
+                ComponentStorage.removeCPU()  
+            case 6:  # Графический процессор
+                ComponentStorage.removeGPU()  
+            case 7:  # Материнская плата
+                ComponentStorage.removeMotherBoard()  
+            case 8:  # Оперативная память
+                ComponentStorage.removeRAM()  
+            case 9:  # Блок питания
+                ComponentStorage.removePowerSupply()  
+            case _:  # Некорректная цифра
+                print("Некорректная цифра")  
 
     def showComponents(self) -> list:
         choice = int(input("""Список каких компонентов показать?
-              1 - ОС
-              2 - SSD
-              3 - Охлаждение
-              4 - Системный блок
-              5 - Центральный процессор
-              6 - Графический процессор
-              7 - Материнская плата
-              8 - Оперативная память
-              9 - Блок питания
-              """))
+        1 - ОС
+        2 - SSD
+        3 - Охлаждение
+        4 - Системный блок
+        5 - Центральный процессор
+        6 - Графический процессор
+        7 - Материнская плата
+        8 - Оперативная память
+        9 - Блок питания
+        """))
         
         match choice:
-            case 1:  ComponentStorage.showListOS()  # ОС
-            case 2:  ComponentStorage.showListSSD()  # SSD
-            case 3:  ComponentStorage.showListCPUCooler()  # Охлаждение
-            case 4:  ComponentStorage.showListCase()  # Системный блок
-            case 5:  ComponentStorage.showListCPU()  # Центральный процессор
-            case 6:  ComponentStorage.showListGPU()  # Графический процессор
-            case 7:  ComponentStorage.showListMotherBoard()  # Материнская плата
-            case 8:  ComponentStorage.showListRAM()  # Оперативная память
-            case 9:  ComponentStorage.showListPowerSupply()  # Блок питания
-            case _:  print("Некорректная цифра")  # Некорректная цифра
-     
+            case 1:  # ОС
+                ComponentStorage.showListOS()  
+            case 2:  # SSD
+                ComponentStorage.showListSSD()  
+            case 3:  # Охлаждение
+                ComponentStorage.showListCPUCooler()  
+            case 4:  # Системный блок
+                ComponentStorage.showListCase()  
+            case 5:  # Центральный процессор
+                ComponentStorage.showListCPU()  
+            case 6:  # Графический процессор
+                ComponentStorage.showListGPU()  
+            case 7:  # Материнская плата
+                ComponentStorage.showListMotherBoard()  
+            case 8:  # Оперативная память
+                ComponentStorage.showListRAM()  
+            case 9:  # Блок питания
+                ComponentStorage.showListPowerSupply()  
+            case _:  # Некорректная цифра
+                print("Некорректная цифра")  
+
 cursor.close()
 connection.close()
