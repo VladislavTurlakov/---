@@ -31,7 +31,7 @@ def adminVerification():
 
 def adminMenu():
     """Функция отображения меню для пользователя в роли Admin"""
-    print("\n0 - Выход в главное меню\n1 - Добавление компоненты\n2 - Удаление компоненты\n3 - Получение списка")
+    print("\n0 - Выход из программы\n1 - Добавление компоненты\n2 - Удаление компоненты\n3 - Получение списка")
   
 def adminActing():
     """Функция сущности Admin"""
@@ -40,8 +40,7 @@ def adminActing():
         adminMenu()
         action = int(input("\nВыберите действие: "))
         match action:
-            case 0:  # выход в главное меню
-                pass
+            case 0:  # выход из программы
                 break
             case 1:  # добавление компоненты
                 result = admin.addComponent()
@@ -58,7 +57,7 @@ def adminActing():
                     print("Не удалось удалить компоненту из базы данных")
                 break
             case 3:  # получение списка
-                result = admin.showComponents()
+                result = admin.showComponents()  # возвращает список компонентов
                 print(result)
                 break
     

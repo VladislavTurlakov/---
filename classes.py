@@ -10,8 +10,7 @@ connection = psycopg2.connect(user=user,
                               database=database)
 
 cursor = connection.cursor()
-cursor.close()
-connection.close()
+
 
 class Computer:
     """Класс выходного объекта компьютера"""
@@ -209,82 +208,6 @@ class PowerSupply(Component):
         self.__efficiencyRating = efficiencyRating
         self.__Modular = Modular
 
-class Admin:
-    """Класс Admin"""
-    
-    def addComponent(self, component: Component) -> bool:
-        choice = int(input("""Что хотим добавить в базу данных?
-              1 - ОС
-              2 - SSD
-              3 - Охлаждение
-              4 - Системный блок
-              5 - Центральный процессор
-              6 - Графический процессор
-              7 - Материнская плата
-              8 - Оперативная память
-              9 - Блок питания
-              """))
-        match choice:
-            case 1:  pass #addOS()  # ОС
-            case 2:  pass #addSSD()  # SSD
-            case 3:  pass #addCPUCooler()  # Охлаждение
-            case 4:  pass #addCase()  # Системный блок
-            case 5:  pass #addCPU()  # Центральный процессор
-            case 6:  pass #addGPU()  # Графический процессор
-            case 7:  pass #addMotherBoard()  # Материнская плата
-            case 8:  pass #addListRAM()  # Оперативная память
-            case 9:  pass #addPowerSupply()  # Блок питания
-            case _:  print("Некорректная цифра")  # Некорректная цифра
-
-        
-    def removeComponent(self, component: Component) -> bool:
-        choice = int(input("""Что хотим удалить из базы данных?
-              1 - ОС
-              2 - SSD
-              3 - Охлаждение
-              4 - Системный блок
-              5 - Центральный процессор
-              6 - Графический процессор
-              7 - Материнская плата
-              8 - Оперативная память
-              9 - Блок питания
-              """))
-        match choice:
-            case 1:  pass #removeOS()  # ОС
-            case 2:  pass #removeSSD()  # SSD
-            case 3:  pass #removeCPUCooler()  # Охлаждение
-            case 4:  pass #removeCase()  # Системный блок
-            case 5:  pass #removeCPU()  # Центральный процессор
-            case 6:  pass #removeGPU()  # Графический процессор
-            case 7:  pass #removeMotherBoard()  # Материнская плата
-            case 8:  pass #removeRAM()  # Оперативная память
-            case 9:  pass#removePowerSupply()  # Блок питания
-            case _:  print("Некорректная цифра")  # Некорректная цифра
-
-    def showComponents(self) -> list:
-        choice = int(input("""Список каких компонентов показать?
-              1 - ОС
-              2 - SSD
-              3 - Охлаждение
-              4 - Системный блок
-              5 - Центральный процессор
-              6 - Графический процессор
-              7 - Материнская плата
-              8 - Оперативная память
-              9 - Блок питания
-              """))
-        match choice:
-            case 1:  pass #showListOS()  # ОС
-            case 2:  pass #showListSSD()  # SSD
-            case 3:  pass #showListCPUCooler()  # Охлаждение
-            case 4:  pass #showListCase()  # Системный блок
-            case 5:  pass #showListCPU()  # Центральный процессор
-            case 6:  pass #showListGPU()  # Графический процессор
-            case 7:  pass #showListMotherBoard()  # Материнская плата
-            case 8:  pass #showListRAM()  # Оперативная память
-            case 9:  pass #showListPowerSupply()  # Блок питания
-            case _:  print("Некорректная цифра")  # Некорректная цифра
-
 class ComponentStorage:
     def __init__(self, listOS: list, listSSD: list, listCPUCooler: list, listCase: list, listCPU: list, listGPU: list, 
                  listMotherBoard: list, listRAM: list, listPowerSupply: list):
@@ -353,30 +276,109 @@ class ComponentStorage:
         pass
 
     def showListOS(self) -> list:
-        pass
+        query = """"""
 
     def showListSSD(self) -> list:
-        pass
+        query = """"""
 
     def showListCPUCooler(self) -> list:
-        pass
+        query = """"""
 
     def showListCase(self) -> list:
-        pass
+        query = """"""
 
     def showListCPU(self) -> list:
-        pass
+        query = """"""
 
     def showListGPU(self) -> list:
-        pass
+        query = """"""
 
     def showListMotherBoard(self) -> list:
-        pass
+        query = """"""
 
     def showListRAM(self) -> list:
-        pass
+        query = """"""
 
     def showListPowerSupply(self) -> list:
-        pass
-     
+        query = """"""
 
+class Admin:
+    """Класс Admin"""
+
+    def addComponent(self, component: Component) -> bool:
+        choice = int(input("""Что хотим добавить в базу данных?
+              1 - ОС
+              2 - SSD
+              3 - Охлаждение
+              4 - Системный блок
+              5 - Центральный процессор
+              6 - Графический процессор
+              7 - Материнская плата
+              8 - Оперативная память
+              9 - Блок питания
+              """))
+        
+        match choice:
+            case 1:  ComponentStorage.addOS() # ОС
+            case 2:  ComponentStorage.addSSD()  # SSD
+            case 3:  ComponentStorage.addCPUCooler()  # Охлаждение
+            case 4:  ComponentStorage.addCase()  # Системный блок
+            case 5:  ComponentStorage.addCPU()  # Центральный процессор
+            case 6:  ComponentStorage.addGPU()  # Графический процессор
+            case 7:  ComponentStorage.addMotherBoard()  # Материнская плата
+            case 8:  ComponentStorage.addListRAM()  # Оперативная память
+            case 9:  ComponentStorage.addPowerSupply()  # Блок питания
+            case _:  print("Некорректная цифра")  # Некорректная цифра
+
+    def removeComponent(self, component: Component) -> bool:
+        choice = int(input("""Что хотим удалить из базы данных?
+              1 - ОС
+              2 - SSD
+              3 - Охлаждение
+              4 - Системный блок
+              5 - Центральный процессор
+              6 - Графический процессор
+              7 - Материнская плата
+              8 - Оперативная память
+              9 - Блок питания
+              """))
+        
+        match choice:
+            case 1:  ComponentStorage.removeOS()  # ОС
+            case 2:  ComponentStorage.removeSSD()  # SSD
+            case 3:  ComponentStorage.removeCPUCooler()  # Охлаждение
+            case 4:  ComponentStorage.removeCase()  # Системный блок
+            case 5:  ComponentStorage.removeCPU()  # Центральный процессор
+            case 6:  ComponentStorage.removeGPU()  # Графический процессор
+            case 7:  ComponentStorage.removeMotherBoard()  # Материнская плата
+            case 8:  ComponentStorage.removeRAM()  # Оперативная память
+            case 9:  ComponentStorage.removePowerSupply()  # Блок питания
+            case _:  print("Некорректная цифра")  # Некорректная цифра
+
+    def showComponents(self) -> list:
+        choice = int(input("""Список каких компонентов показать?
+              1 - ОС
+              2 - SSD
+              3 - Охлаждение
+              4 - Системный блок
+              5 - Центральный процессор
+              6 - Графический процессор
+              7 - Материнская плата
+              8 - Оперативная память
+              9 - Блок питания
+              """))
+        
+        match choice:
+            case 1:  ComponentStorage.showListOS()  # ОС
+            case 2:  ComponentStorage.showListSSD()  # SSD
+            case 3:  ComponentStorage.showListCPUCooler()  # Охлаждение
+            case 4:  ComponentStorage.showListCase()  # Системный блок
+            case 5:  ComponentStorage.showListCPU()  # Центральный процессор
+            case 6:  ComponentStorage.showListGPU()  # Графический процессор
+            case 7:  ComponentStorage.showListMotherBoard()  # Материнская плата
+            case 8:  ComponentStorage.showListRAM()  # Оперативная память
+            case 9:  ComponentStorage.showListPowerSupply()  # Блок питания
+            case _:  print("Некорректная цифра")  # Некорректная цифра
+     
+cursor.close()
+connection.close()
