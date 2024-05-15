@@ -224,55 +224,55 @@ class ComponentStorage:
         return True
 
     def addSSD(ssd: SSD) -> bool:
-        pass
+        return True
 
     def addCPUCooler(cpucooler: CPUCooler) -> bool:
-        pass
+        return True
 
     def addCase(case: Case) -> bool:
-        pass
+        return True
 
     def addCPU(cpu: CPU) -> bool:
-        pass
+        return True
 
     def addGPU(gpu: GPU) -> bool:
-        pass
+        return True
 
     def addMotherBoard(motherboard: MotherBoard) -> bool:
-        pass
+        return True
 
     def addRAM(ram: RAM) -> bool:
-        pass
+        return True
 
     def addPowerSupply(powersupply: PowerSupply) -> bool:
-        pass
+        return True
 
     def removeOS(os: OS) -> bool:
-        pass
+        return True
 
     def removeSSD(ssd: SSD) -> bool:
-        pass
+        return True
 
     def removeCPUCooler(cpucooler: CPUCooler) -> bool:
-        pass
+        return True
 
     def removeCase(case: Case) -> bool:
-        pass
+        return True
 
     def removeCPU(cpu: CPU) -> bool:
-        pass
+        return True
 
     def removeGPU(gpu: GPU) -> bool:
-        pass
+        return True
 
     def removeMotherBoard(motherboard: MotherBoard) -> bool:
-        pass
+        return True
 
     def removeRAM(ram: RAM) -> bool:
-        pass
+        return True
 
     def removePowerSupply(powersupply: PowerSupply) -> bool:
-        pass
+        return True
 
     def showListOS() -> list:
         query = """"""
@@ -434,23 +434,41 @@ class Admin:
         
         match choice:
             case 1:  # ОС
-                ComponentStorage.removeOS()  
+                uuid = int(input("Введите uuid ОС: "))
+                return ComponentStorage.removeOS()
+            
             case 2:  # SSD
-                ComponentStorage.removeSSD()  
+                uuid = int(input("Введите uuid SSD: "))
+                return ComponentStorage.removeSSD()
+            
             case 3:  # Охлаждение
-                ComponentStorage.removeCPUCooler()  
+                uuid = int(input("Введите uuid CPUCooler: "))
+                return ComponentStorage.removeCPUCooler()
+
             case 4:  # Системный блок
-                ComponentStorage.removeCase()  
+                uuid = int(input("Введите uuid Case: "))
+                return ComponentStorage.removeCase()
+
             case 5:  # Центральный процессор
-                ComponentStorage.removeCPU()  
+                uuid = int(input("Введите uuid CPU: "))
+                return ComponentStorage.removeCPU()
+
             case 6:  # Графический процессор
-                ComponentStorage.removeGPU()  
+                uuid = int(input("Введите uuid GPU: "))
+                return ComponentStorage.removeGPU()
+
             case 7:  # Материнская плата
-                ComponentStorage.removeMotherBoard()  
+                uuid = int(input("Введите uuid MotherBoard: "))
+                return ComponentStorage.removeMotherBoard()
+            
             case 8:  # Оперативная память
-                ComponentStorage.removeRAM()  
+                uuid = int(input("Введите uuid RAM: "))
+                return ComponentStorage.removeRAM()
+
             case 9:  # Блок питания
-                ComponentStorage.removePowerSupply()  
+                uuid = int(input("Введите uuid PowerSupply: "))
+                return ComponentStorage.removePowerSupply()
+
             case _:  # Некорректная цифра
                 print("Некорректная цифра")  
 
@@ -469,25 +487,27 @@ class Admin:
         
         match choice:
             case 1:  # ОС
-                ComponentStorage.showListOS()  
+                resultList = ComponentStorage.showListOS()  
             case 2:  # SSD
-                ComponentStorage.showListSSD()  
+                resultList = ComponentStorage.showListSSD()  
             case 3:  # Охлаждение
-                ComponentStorage.showListCPUCooler()  
+                resultList = ComponentStorage.showListCPUCooler()  
             case 4:  # Системный блок
-                ComponentStorage.showListCase()  
+                resultList = ComponentStorage.showListCase()  
             case 5:  # Центральный процессор
-                ComponentStorage.showListCPU()  
+                resultList = ComponentStorage.showListCPU()  
             case 6:  # Графический процессор
-                ComponentStorage.showListGPU()  
+                resultList = ComponentStorage.showListGPU()  
             case 7:  # Материнская плата
-                ComponentStorage.showListMotherBoard()  
+                resultList = ComponentStorage.showListMotherBoard()  
             case 8:  # Оперативная память
-                ComponentStorage.showListRAM()  
+                resultList = ComponentStorage.showListRAM()  
             case 9:  # Блок питания
-                ComponentStorage.showListPowerSupply()  
+                resultList = ComponentStorage.showListPowerSupply()  
             case _:  # Некорректная цифра
                 print("Некорректная цифра")  
+
+        return resultList
 
 cursor.close()
 connection.close()
