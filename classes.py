@@ -318,10 +318,10 @@ class Admin:
         """))
         
         component._cost = int(input("Введите стоимость: "))
-        component._name = str(input("Введите назваание: "))
+        component._name = str(input("Введите название: "))
 
         while True:
-            component._uuid = int(input("Введите id: "))
+            component._uuid = int(input("Введите uuid: "))
             """if component._uuid in database: # если этот id есть в бд
                    continue
                else:  # этого id нет в бд
@@ -333,27 +333,21 @@ class Admin:
                 mode = int(input("Введите mode: "))
                 sMemory = int(input("Введите maxSupportedMemory: "))
                 objectOS = OS(component._cost,component._name,component._uuid,mode=mode,maxSupportedMemory=sMemory)  
-                if ComponentStorage.addOS(objectOS) == True:
-                    print(f"ОС {objectOS} добавлена")
-                    return True
+                return ComponentStorage.addOS(objectOS)
                 
             case 2:  # SSD
                 capacity = str(input("Введите capacity: "))
                 formFactor = str(input("Введите formFactor: "))
                 cache = str(input("Введите cache: "))
                 objectSSD = SSD(component._cost,component._name,component._uuid,capacity=capacity, formFactor=formFactor,cache=cache)
-                if ComponentStorage.addSSD(objectSSD) == True:
-                    print(f"SSD {objectSSD} добавлен")
-                    return True
+                return ComponentStorage.addSSD(objectSSD)
                 
             case 3:  # Охлаждение
                 fanRPM = str(input("Введите fanRPM: "))
                 color = str(input("Введите color: "))
                 noiseLevel = float(input("Введите noiseLevel: "))
                 objectCPUCooler = CPUCooler(component._cost,component._name,component._uuid,fanRPM=fanRPM,color=color,noiseLevel=noiseLevel)
-                if ComponentStorage.addCPUCooler(objectCPUCooler) == True:
-                    print(f"CPUCooler {objectCPUCooler} добавлен")
-                    return True
+                return ComponentStorage.addCPUCooler(objectCPUCooler)
                 
             case 4:  # Системный блок
                 type = str(input("Введите type: "))
@@ -361,9 +355,7 @@ class Admin:
                 sidePanel = str(input("Введите sidePanel: "))
                 external525 = int(input("Введите external525: "))
                 objectCase = Case(component._cost,component._name,component._uuid,type=type,color=color,sidePanel=sidePanel,external525=external525)
-                if ComponentStorage.addCase(objectCase) == True:
-                    print(f"Case {objectCase} добавлен")
-                    return True
+                return ComponentStorage.addCase(objectCase)
                 
             case 5:  # Центральный процессор
                 coreCount = int(input("Введите coreCount: "))
@@ -372,9 +364,7 @@ class Admin:
                 coreClock = float(input("Введите coreClock: "))
                 TDP = int(input("Введите TDP: "))
                 objectCPU = CPU(component._cost,component._name,component._uuid,coreCount=coreCount,boostClock=boostClock,integratedGraphics=integratedGraphics,coreClock=coreClock,TDP=TDP)
-                if ComponentStorage.addCPU(objectCPU) == True:
-                    print(f"CPU {objectCPU} добавлен")
-                    return True
+                return ComponentStorage.addCPU(objectCPU)
                 
             case 6:  # Графический процессор
                 chipSet = str(input("Введите chipSet: "))
@@ -384,9 +374,7 @@ class Admin:
                 memory = str(input("Введите memory: "))
                 length = int(input("Введите length: "))
                 objectGPU = GPU(component._cost,component._name,component._uuid,chipSet=chipSet,coreClock=coreClock,color=color,memory=memory,boostClock=boostClock,length=length)
-                if ComponentStorage.addGPU(objectGPU) == True:
-                    print(f"GPU {objectGPU} добавлен")
-                    return True
+                return ComponentStorage.addGPU(objectGPU)
                 
             case 7:  # Материнская плата
                 socket = str(input("Введите socket: "))
@@ -394,17 +382,13 @@ class Admin:
                 formFactor = str(input("Введите formFactor: "))
                 memorySlots = int(input("Введите memorySlots: "))
                 objectMotherBoard = MotherBoard(component._cost,component._name,component._uuid,socket=socket,memoryMax=memoryMax,formFactor=formFactor,memorySlots=memorySlots)
-                if ComponentStorage.addMotherBoard(objectMotherBoard) == True:
-                    print(f"MotherBoard {objectMotherBoard} добавлен")
-                    return True
+                return ComponentStorage.addMotherBoard(objectMotherBoard)
                 
             case 8:  # Оперативная память
                 modules = str(input("Введите modules: "))
                 CASLatency = int(input("Введите CASLatency: "))
                 objectRAM = RAM(component._cost,component._name,component._uuid,modules=modules,CASLatency=CASLatency)  
-                if ComponentStorage.addRAM(objectRAM) == True:
-                    print(f"RAM {objectRAM} добавлена")
-                    return True
+                return ComponentStorage.addRAM(objectRAM)
              
             case 9:  # Блок питания
                 type = str(input("Введите type: "))
@@ -412,12 +396,12 @@ class Admin:
                 efficiencyRating = str(input("Введите efficiencyRating: "))
                 Modular = str(input("Введите Modular: "))
                 objectPowerSupply = PowerSupply(component._cost,component._name,component._uuid,type=type,wattage=wattage,efficiencyRating=efficiencyRating,Modular=Modular)
-                if ComponentStorage.addPowerSupply(objectPowerSupply) == True:
-                    print(f"PowerSupply {objectPowerSupply} добавлен")
-                    return True
+                return ComponentStorage.addPowerSupply(objectPowerSupply)
                 
             case _:  # Некорректная цифра
-                print("Некорректная цифра")  
+                print("Некорректная цифра")
+
+        return False  
 
     def removeComponent(self, component: Component) -> bool:
         choice = int(input("""Что хотим удалить из базы данных?
@@ -431,46 +415,85 @@ class Admin:
         8 - Оперативная память
         9 - Блок питания
         """))
+
+        component._uuid = int(input("Введите uuid: "))
+        component._cost = int(input("Введите стоимость: "))
+        component._name = str(input("Введите название: "))
         
         match choice:
             case 1:  # ОС
-                uuid = int(input("Введите uuid ОС: "))
-                return ComponentStorage.removeOS()
+                mode = int(input("Введите mode: "))
+                sMemory = int(input("Введите maxSupportedMemory: "))
+                objectOS = OS(component._cost,component._name,component._uuid,mode=mode,maxSupportedMemory=sMemory)  
+                return ComponentStorage.removeOS(objectOS)
             
             case 2:  # SSD
-                uuid = int(input("Введите uuid SSD: "))
-                return ComponentStorage.removeSSD()
+                capacity = str(input("Введите capacity: "))
+                formFactor = str(input("Введите formFactor: "))
+                cache = str(input("Введите cache: "))
+                objectSSD = SSD(component._cost,component._name,component._uuid,capacity=capacity, formFactor=formFactor,cache=cache)
+                return ComponentStorage.removeSSD(objectSSD)
             
             case 3:  # Охлаждение
-                uuid = int(input("Введите uuid CPUCooler: "))
-                return ComponentStorage.removeCPUCooler()
+                fanRPM = str(input("Введите fanRPM: "))
+                color = str(input("Введите color: "))
+                noiseLevel = float(input("Введите noiseLevel: "))
+                objectCPUCooler = CPUCooler(component._cost,component._name,component._uuid,fanRPM=fanRPM,color=color,noiseLevel=noiseLevel)
+                return ComponentStorage.removeCPUCooler(objectCPUCooler)
 
             case 4:  # Системный блок
-                uuid = int(input("Введите uuid Case: "))
-                return ComponentStorage.removeCase()
+                type = str(input("Введите type: "))
+                color = str(input("Введите color: "))
+                sidePanel = str(input("Введите sidePanel: "))
+                external525 = int(input("Введите external525: "))
+                objectCase = Case(component._cost,component._name,component._uuid,type=type,color=color,sidePanel=sidePanel,external525=external525)
+                return ComponentStorage.removeCase(objectCase)
 
             case 5:  # Центральный процессор
-                uuid = int(input("Введите uuid CPU: "))
-                return ComponentStorage.removeCPU()
+                coreCount = int(input("Введите coreCount: "))
+                boostClock = float(input("Введите boostClock: "))
+                integratedGraphics = str(input("Введите integratedGraphics: "))
+                coreClock = float(input("Введите coreClock: "))
+                TDP = int(input("Введите TDP: "))
+                objectCPU = CPU(component._cost,component._name,component._uuid,coreCount=coreCount,boostClock=boostClock,integratedGraphics=integratedGraphics,coreClock=coreClock,TDP=TDP)
+                return ComponentStorage.removeCPU(objectCPU)
 
             case 6:  # Графический процессор
-                uuid = int(input("Введите uuid GPU: "))
-                return ComponentStorage.removeGPU()
+                chipSet = str(input("Введите chipSet: "))
+                boostClock = float(input("Введите boostClock: "))
+                color = str(input("Введите color: "))
+                coreClock = float(input("Введите coreClock: "))
+                memory = str(input("Введите memory: "))
+                length = int(input("Введите length: "))
+                objectGPU = GPU(component._cost,component._name,component._uuid,chipSet=chipSet,coreClock=coreClock,color=color,memory=memory,boostClock=boostClock,length=length)
+                return ComponentStorage.removeGPU(objectGPU)
 
             case 7:  # Материнская плата
-                uuid = int(input("Введите uuid MotherBoard: "))
-                return ComponentStorage.removeMotherBoard()
+                socket = str(input("Введите socket: "))
+                memoryMax = int(input("Введите memoryMax: "))
+                formFactor = str(input("Введите formFactor: "))
+                memorySlots = int(input("Введите memorySlots: "))
+                objectMotherBoard = MotherBoard(component._cost,component._name,component._uuid,socket=socket,memoryMax=memoryMax,formFactor=formFactor,memorySlots=memorySlots)
+                return ComponentStorage.removeMotherBoard(objectMotherBoard)
             
             case 8:  # Оперативная память
-                uuid = int(input("Введите uuid RAM: "))
-                return ComponentStorage.removeRAM()
+                modules = str(input("Введите modules: "))
+                CASLatency = int(input("Введите CASLatency: "))
+                objectRAM = RAM(component._cost,component._name,component._uuid,modules=modules,CASLatency=CASLatency)  
+                return ComponentStorage.removeRAM(objectRAM)
 
             case 9:  # Блок питания
-                uuid = int(input("Введите uuid PowerSupply: "))
-                return ComponentStorage.removePowerSupply()
+                type = str(input("Введите type: "))
+                wattage = int(input("Введите wattage: "))
+                efficiencyRating = str(input("Введите efficiencyRating: "))
+                Modular = str(input("Введите Modular: "))
+                objectPowerSupply = PowerSupply(component._cost,component._name,component._uuid,type=type,wattage=wattage,efficiencyRating=efficiencyRating,Modular=Modular)
+                return ComponentStorage.removePowerSupply(objectPowerSupply)
 
             case _:  # Некорректная цифра
                 print("Некорректная цифра")  
+    
+        return False
 
     def showComponents(self) -> list:
         choice = int(input("""Список каких компонентов показать?
